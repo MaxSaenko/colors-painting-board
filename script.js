@@ -10,35 +10,28 @@ const colors = [
   "#f6fccf",
   "#effaaa",
   "#e1f084",
-  "#ddf257",
-  "#d7f229",
-  "#9db504",
 ];
 const SQUARES_NUMBER = 800;
 
 for (let i = 0; i < SQUARES_NUMBER; i++) {
   const square = document.createElement("div");
   square.classList.add("square");
-
-  square.addEventListener("mouseover", () => setColor(square));
-
-  square.addEventListener("mouseleave", () => removeColor(square));
-
+  square.addEventListener("mouseover", setColor);
+  square.addEventListener("mouseleave", removeColor);
   board.append(square);
 }
 
-function setColor(element) {
+function setColor(event) {
   const color = getRandomColor();
-  element.style.backgroundColor = color;
-  element.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
+  event.target.style.backgroundColor = color;
+  event.target.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
 }
 
-function removeColor(element) {
-  element.style.backgroundColor = "#1d1d1d";
-  element.style.boxShadow = `0 0 2px #000`;
+function removeColor(event) {
+  event.target.style.backgroundColor = "#1d1d1d";
+  event.target.style.boxShadow = `0 0 2px #000`;
 }
 
 function getRandomColor() {
-  const index = Math.floor(Math.random() * colors.length);
-  return colors[index];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
